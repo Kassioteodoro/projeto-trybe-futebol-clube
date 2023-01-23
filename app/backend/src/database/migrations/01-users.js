@@ -1,7 +1,7 @@
-import { DataTypes, QueryInterface } from "sequelize";
+'use strict';
 
-export default {
-  async up(QueryInterface: QueryInterface, Sequelize: typeof DataTypes) {
+module.exports = {
+  up: async (QueryInterface, Sequelize) => {
     await QueryInterface.createTable('users', {
       id: {
         allowNull: false,
@@ -9,16 +9,16 @@ export default {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      userName: {
+      username: {
         type: Sequelize.STRING,
-        field: 'user_name'
+        allowNull: false,
       },
       role: Sequelize.STRING,
       email: Sequelize.STRING,
       password: Sequelize.STRING,
     })
   },
-  async down(QueryInterface: QueryInterface, _Sequelize: typeof DataTypes) {
+  down: async (QueryInterface, _Sequelize) => {
     await QueryInterface.dropTable('users')
   }
 };
