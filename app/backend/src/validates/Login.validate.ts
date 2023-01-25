@@ -8,13 +8,13 @@ export default class LoginValidate {
   ) {}
 
   emailVerified(): boolean {
-    if (this._response.email) return true;
-    return false;
+    if (!this._response.email) return false;
+    return true;
   }
 
   passwordVerified(): boolean {
-    if (this._response.password) return true;
-    return false;
+    if (!this._response.password) return false;
+    return true;
   }
 
   loginVerified(): boolean {
@@ -29,7 +29,7 @@ export default class LoginValidate {
     console.log(user);
     if (!emailRegex.test(this._response.email)) return false;
     if (!user) return false;
-    if (crypto.validPassword(this._response.password, user.password)) return false;
-    return true;
+    if (!crypto.validPassword(this._response.password, user.password)) return false;
+    return { type: true, data: user };
   };
 }
