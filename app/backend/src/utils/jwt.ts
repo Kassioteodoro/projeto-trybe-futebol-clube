@@ -3,11 +3,11 @@ import IBody from '../interfaces/IBody';
 
 export default class _jwt {
   static generateToken(body: IBody) {
-    const secret = process.env.JWT_SECRET;
+    const secret = process.env.JWT_SECRET as string;
     const jwtConfig = {
       expiresIn: '1d',
     };
-    const result = jwt.sign(body, secret as string, jwtConfig);
+    const result = jwt.sign(body, secret, jwtConfig);
     return result;
   }
 
