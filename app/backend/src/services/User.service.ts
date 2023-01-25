@@ -7,9 +7,11 @@ export default class UserService {
   LoginAcess = async (request: ILogin) => {
     const verified = new LoginValidate(request);
     const isVerified = verified.loginVerified();
-    const isValid = await verified.loginValid();
+    const user = await verified.loginValid();
+
     if (!isVerified) return { type: 'errorVerified', message: 'All fields must be filled' };
-    if (!isValid) return { type: 'errorValid', message: 'Incorrect email or password' };
-    return { type: '', message: _jwt.generateToken(isValid.data) };
+    if (!user) return { type: 'errorValid', message: 'Incorrect email or password' };
+    return { type: '',
+      message: _jwt.generateToken({ id: user.id, role: user.role, email: user.email }) };
   };
 }

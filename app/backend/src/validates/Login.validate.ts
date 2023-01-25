@@ -26,10 +26,10 @@ export default class LoginValidate {
   loginValid = async () => {
     const emailRegex = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/g;
     const user = await User.findOne({ where: { email: this._response.email } });
-    console.log(user);
+    console.log(user?.dataValues);
     if (!emailRegex.test(this._response.email)) return false;
     if (!user) return false;
     if (!crypto.validPassword(this._response.password, user.password)) return false;
-    return { type: true, data: user };
+    return user.dataValues;
   };
 }
