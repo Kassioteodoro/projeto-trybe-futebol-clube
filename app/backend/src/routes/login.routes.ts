@@ -1,14 +1,11 @@
 import { Router } from 'express';
-import User from '../services/User.service';
 
 import Login from '../controllers/login.controller';
 
-const user = new User();
-
-const login = new Login(user);
+const login = new Login();
 
 const loginRouter = Router();
 
-loginRouter.post('/login', login.LoginAcess);
+loginRouter.post('/login', (req, res) => login.LoginAcess(req, res));
 
 export default loginRouter;
