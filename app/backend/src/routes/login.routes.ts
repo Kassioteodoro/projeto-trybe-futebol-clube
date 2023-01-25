@@ -6,6 +6,6 @@ const login = new Login();
 
 const loginRouter = Router();
 
-loginRouter.post('/login', (req, res) => login.LoginAcess(req, res));
+loginRouter.post('/', (req, res) => login.LoginAcess(req, res));
 
 export default loginRouter;

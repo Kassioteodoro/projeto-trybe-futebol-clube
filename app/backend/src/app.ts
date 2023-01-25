@@ -1,5 +1,5 @@
 import * as express from 'express';
-// import loginRouter from './routes/login.routes';
+import loginRouter from './routes/login.routes';
 // import Login from './controllers/login.controller';
 
 // const login = new Login();
@@ -12,7 +12,7 @@ class App {
     this.config();
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
-    this.app.post('/', (req, res) => res.json({ ok: 'ta funcionando' }));
+    this.app.use('/login', loginRouter);
   }
 
   private config():void {
