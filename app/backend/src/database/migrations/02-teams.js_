@@ -1,7 +1,6 @@
-import { DataTypes, QueryInterface } from "sequelize";
 
-export default {
-  async up(QueryInterface: QueryInterface, Sequelize: typeof DataTypes) {
+module.exports = {
+  up: async (QueryInterface, Sequelize) => {
     await QueryInterface.createTable('teams', {
       id: {
         allowNull: false,
@@ -15,7 +14,7 @@ export default {
       }
     })
   },
-  async down(QueryInterface: QueryInterface, _Sequelize: typeof DataTypes) {
+  down: async (QueryInterface, _Sequelize) => {
     await QueryInterface.dropTable('teams')
   }
 };
