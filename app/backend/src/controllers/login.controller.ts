@@ -6,7 +6,7 @@ import statusCode from '../utils/statusCode';
 //  e retorna um token
 export default class Login {
   constructor(
-    private user = new User(),
+    private user: User,
   ) {}
 
   LoginAcess = async (req: Request, res: Response) => {
