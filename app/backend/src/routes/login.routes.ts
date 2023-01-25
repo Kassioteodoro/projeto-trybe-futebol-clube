@@ -9,6 +9,6 @@ const login = new Login(user);
 
 const loginRouter = Router();
 
-loginRouter.get('/login', login.LoginAcess);
+loginRouter.post('/login', login.LoginAcess);
 
 export default loginRouter;

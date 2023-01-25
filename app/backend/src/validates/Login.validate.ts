@@ -7,12 +7,12 @@ export default class LoginValidate {
     private _response: ILogin,
   ) {}
 
-  emailVerified(): boolean {
+  private emailVerified(): boolean {
     if (!this._response.email) return false;
     return true;
   }
 
-  passwordVerified(): boolean {
+  private passwordVerified(): boolean {
     if (!this._response.password) return false;
     return true;
   }
