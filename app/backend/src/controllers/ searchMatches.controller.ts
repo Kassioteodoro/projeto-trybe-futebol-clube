@@ -10,10 +10,12 @@ export default class SearchMatches {
         {
           model: Team,
           as: 'homeTeam',
+          attributes: ['teamName'],
         },
         {
           model: Team,
           as: 'awayTeam',
+          attributes: ['teamName'],
         },
       ] });
     console.log(response);
