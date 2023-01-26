@@ -1,11 +1,21 @@
 import { Request, Response } from 'express';
-// import Team from '../database/models/Team';
+import Team from '../database/models/Team';
 import Matche from '../database/models/Matche';
 
 export default class SearchMatches {
   getAll = async (_req: Request, res: Response) => {
     console.log('achoooooooooooooooo!!!!!!!!!!!!!!!!!!!!!!!!!!');
-    const response = await Matche.findAll();
+    const response = await Matche.findAll({
+      include: [
+        {
+          model: Team,
+          as: 'homeTeam',
+        },
+        {
+          model: Team,
+          as: 'awayTeam',
+        },
+      ] });
     console.log(response);
     res.status(200).json(response);
   };
