@@ -20,6 +20,10 @@ matchesRouter.post(
   (req, res) => matches.create(req, res),
 );
 matchesRouter.patch(
+  '/:id',
+  (req, res) => matches.updateMatch(req, res),
+);
+matchesRouter.patch(
   '/:id/finish',
   (req, res) => matches.endMatch(req, res),
 );

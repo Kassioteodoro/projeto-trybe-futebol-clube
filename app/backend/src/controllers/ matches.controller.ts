@@ -33,6 +33,12 @@ export default class Matches {
     await Matche.endMatche(Number(id));
     res.status(200).json({ message: 'Finished' });
   };
+
+  updateMatch = async (req: Request, res: Response) => {
+    const { params: { id }, body } = req;
+    await Matche.updateMatch(Number(id), body);
+    res.status(200).json({ message: 'atualizado' });
+  };
   // getById = async (req: Request, res: Response) => {
   //   const { params: { id } } = req;
   //   console.log(id);

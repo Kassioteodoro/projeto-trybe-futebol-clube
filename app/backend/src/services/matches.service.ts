@@ -1,3 +1,4 @@
+import IUpdateMatch from '../interfaces/IUpdateMatch';
 import IMatches from '../interfaces/IMatches';
 import Team from '../database/models/Team';
 import Matche from '../database/models/Matche';
@@ -75,5 +76,15 @@ export default class matchesService {
       { where: { id } },
     );
     console.log(response);
+  };
+
+  static updateMatch = async (id: number, goals: IUpdateMatch) => {
+    const response = await Matche.update(
+      { homeTeamGoals: goals.homeTeamGoals,
+        awayTeamGoals: goals.awayTeamGoals },
+      { where: { id } },
+    );
+    console.log(response);
+    return response;
   };
 }
