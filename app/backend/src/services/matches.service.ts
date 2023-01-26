@@ -1,3 +1,4 @@
+import IMatches from '../interfaces/IMatches';
 import Team from '../database/models/Team';
 import Matche from '../database/models/Matche';
 
@@ -55,5 +56,24 @@ export default class matchesService {
       ],
     });
     return response;
+  };
+
+  static createNewMatche = async (dataMatche: IMatches) => {
+    const response = await Matche.create({
+      homeTeamId: dataMatche.homeTeamId,
+      awayTeamId: dataMatche.awayTeamId,
+      homeTeamGoals: dataMatche.homeTeamGoals,
+      awayTeamGoals: dataMatche.awayTeamGoals,
+      inProgress: true });
+    console.log('esse sou eu', response);
+    return response;
+  };
+
+  static endMatche = async (id: number) => {
+    const response = await Matche.update(
+      { inProgress: false },
+      { where: { id } },
+    );
+    console.log(response);
   };
 }

@@ -21,21 +21,18 @@ export default class Matches {
     }
     next();
   };
-  // user os filtros como middleware
-  // filterProgress = async (_req: Request, res: Response) => {
-  //   const response = await Matche.findAll({
-  //     where: { inProgress: true },
-  //     include: Team,
-  //   });
-  //   console.log(response);
-  //   res.status(200).json(response);
-  // };
 
-  // filterEnd = async (_req: Request, res: Response) => {
-  //   const response = await Matche.findAll({ where: { inProgress: false } });
-  //   console.log(response);
-  //   res.status(200).json(response);
-  // };
+  create = async (req: Request, res: Response) => {
+    const { body } = req;
+    const response = await Matche.createNewMatche(body);
+    res.status(201).json(response);
+  };
+
+  endMatch = async (req: Request, res: Response) => {
+    const { params: { id } } = req;
+    await Matche.endMatche(Number(id));
+    res.status(200).json({ message: 'Finished' });
+  };
   // getById = async (req: Request, res: Response) => {
   //   const { params: { id } } = req;
   //   console.log(id);
