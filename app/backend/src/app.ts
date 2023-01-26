@@ -1,5 +1,6 @@
 import * as express from 'express';
 import loginRouter from './routes/login.routes';
+import searchTeamsRouter from './routes/searchTeams.routes';
 // import Login from './controllers/login.controller';
 
 // const login = new Login();
@@ -13,6 +14,7 @@ class App {
     // Não remover essa rota
     this.app.get('/', (req, res) => res.json({ ok: true }));
     this.app.use('/login', loginRouter);
+    this.app.use('/teams', searchTeamsRouter);
   }
 
   private config():void {
