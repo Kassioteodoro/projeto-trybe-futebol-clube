@@ -12,7 +12,13 @@ export default class _jwt {
   }
 
   static verifyToken(token: string) {
-    const secret = process.env.JWT_SECRET;
-    return jwt.verify(token, secret as string);
+    try {
+      const secret = process.env.JWT_SECRET;
+      return jwt.verify(token, secret as string);
+    } catch (err) {
+      console.log('olho o errinho');
+
+      return false;
+    }
   }
 }

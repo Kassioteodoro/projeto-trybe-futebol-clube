@@ -1,6 +1,8 @@
 import { Router } from 'express';
+import validateToken from '../middlewares/validateToken';
 
 import Matches from '../controllers/ matches.controller';
+import MatchMiddleValid from '../middlewares/matchMiddleValid';
 
 const matches = new Matches();
 
@@ -13,6 +15,8 @@ matchesRouter.get(
 );
 matchesRouter.post(
   '/',
+  (req, res, next) => validateToken.valid(req, res, next),
+  (req, res, next) => MatchMiddleValid.valid(req, res, next),
   (req, res) => matches.create(req, res),
 );
 matchesRouter.patch(
