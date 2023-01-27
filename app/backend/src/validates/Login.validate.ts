@@ -1,6 +1,6 @@
 import ILogin from '../interfaces/ILogin';
 import User from '../database/models/User';
-import crypto from './crypto';
+import crypto from '../utils/crypto';
 
 export default class LoginValidate {
   constructor(

@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
+import statusCode from '../utils/statusCode';
 import MatcheValidate from '../validates/matche.validate';
-// import statusCode from '../utils/statusCode';
 
 export default class MatchMiddleValid {
   static valid = async (req: Request, res: Response, next: NextFunction) => {
@@ -11,12 +11,12 @@ export default class MatchMiddleValid {
     const isExist = await valid.existTeams();
 
     if (!isValid) {
-      return res.status(422).json({
+      return res.status(statusCode.invalidTeams).json({
         message: 'It is not possible to create a match with two equal teams' });
     }
 
     if (!isExist) {
-      return res.status(404).json({ message: 'There is no team with such id!' });
+      return res.status(statusCode.notFound).json({ message: 'There is no team with such id!' });
     }
 
     next();

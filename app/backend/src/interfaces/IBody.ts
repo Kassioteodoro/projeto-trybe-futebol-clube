@@ -1,4 +1,4 @@
-export default interface Body {
+export default interface IBody {
   id: number,
   role: string,
   email: string,

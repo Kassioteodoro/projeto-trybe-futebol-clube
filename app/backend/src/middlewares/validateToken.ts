@@ -1,8 +1,5 @@
-// import User from '../database/models/User';
 import { NextFunction, Request, Response } from 'express';
 import _jwt from '../utils/jwt';
-// import IBody from '../interfaces/IBody';
-// import ILogin from '../interfaces/ILogin';
 import statusCode from '../utils/statusCode';
 
 export default class validateToken {
@@ -12,7 +9,6 @@ export default class validateToken {
     if (!authorization) {
       return res.status(statusCode.invalidToken).json({ message: 'Token not Found' });
     }
-
     const response = _jwt.verifyToken(authorization);
 
     if (!response) {

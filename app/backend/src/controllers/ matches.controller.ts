@@ -3,7 +3,6 @@ import Matche from '../services/matches.service';
 
 export default class Matches {
   getAll = async (_req: Request, res: Response) => {
-    console.log('achoooooooooooooooo!!!!!!!!!!!!!!!!!!!!!!!!!!');
     const response = await Matche.getAll();
     console.log(response);
     res.status(200).json(response);
