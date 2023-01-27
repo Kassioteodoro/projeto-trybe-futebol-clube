@@ -18,6 +18,7 @@ export default class matchesService {
           attributes: ['teamName'],
         },
       ] });
+
     return response;
   };
 
@@ -66,7 +67,6 @@ export default class matchesService {
       homeTeamGoals: dataMatche.homeTeamGoals,
       awayTeamGoals: dataMatche.awayTeamGoals,
       inProgress: true });
-    console.log('esse sou eu', response);
     return response;
   };
 

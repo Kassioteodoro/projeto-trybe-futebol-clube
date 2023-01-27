@@ -14,7 +14,8 @@ export default class MatcheValidate {
   existTeams = async () => {
     const homeTeam = await Team.findOne({ where: { id: this.match.homeTeamId } });
     const awayTeam = await Team.findOne({ where: { id: this.match.awayTeamId } });
-    if (!homeTeam && !awayTeam) return false;
+
+    if (!homeTeam || !awayTeam) return false;
     return true;
   };
 }

@@ -16,7 +16,7 @@ export default class _jwt {
       const secret = process.env.JWT_SECRET;
       return jwt.verify(token, secret as string);
     } catch (err) {
-      return { type: 'Error' };
+      return 'Error';
     }
   }
 }

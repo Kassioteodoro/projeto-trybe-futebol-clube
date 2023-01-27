@@ -4,7 +4,7 @@ import Matche from '../services/matches.service';
 export default class Matches {
   getAll = async (_req: Request, res: Response) => {
     const response = await Matche.getAll();
-    console.log(response);
+    // console.log(response);
     res.status(200).json(response);
   };
 
@@ -38,11 +38,4 @@ export default class Matches {
     await Matche.updateMatch(Number(id), body);
     res.status(200).json({ message: 'atualizado' });
   };
-  // getById = async (req: Request, res: Response) => {
-  //   const { params: { id } } = req;
-  //   console.log(id);
-  //   const response = await Team.findByPk(id);
-  //   console.log(response);
-  //   res.status(200).json({ data: response });
-  // };
 }
