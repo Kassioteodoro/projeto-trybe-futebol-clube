@@ -19,6 +19,7 @@ matchesRouter.post(
   (req, res, next) => MatchMiddleValid.valid(req, res, next),
   (req, res) => matches.create(req, res),
 );
+
 matchesRouter.patch(
   '/:id',
   (req, res) => matches.updateMatch(req, res),
