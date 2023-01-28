@@ -6,8 +6,10 @@ import Login from '../services/login.service';
 import { app } from '../app';
 import _jwt from '../utils/jwt';
 // import Example from '../database/models/ExampleModel';
-
+import {response, result} from './mocks'
 import { Response } from 'superagent';
+import Team from '../database/models/Team';
+import TeamService from '../services/team.service';
 
 chai.use(chaiHttp);
 
@@ -36,8 +38,36 @@ describe('testando a camada service', function () {
     })
   })
   describe('team', function () {
-    it('getAll', function () {})
-    it('getById', function () {})
+    it('getAll', async function () {
+      before(async () => {
+        sinon
+          .stub(Team, "findAll")
+          .resolves({
+            ...response
+          }as Team[]);
+      });
+      after(()=>{
+          (Team.findAll as sinon.SinonStub).restore();
+        })
+        let test = await TeamService.getAll()
+        console.log(test);
+        expect(test).to.deep.equal(result)
+    })
+    it('getById', async function () {
+      before(async () => {
+        sinon
+          .stub(Team, "findByPk")
+          .resolves({
+            ...response[0]
+          }as Team);
+      });
+      after(()=>{
+          (Team.findByPk as sinon.SinonStub).restore();
+        })
+        let test = await TeamService.getById(3)
+        console.log(test);
+        expect(test).to.deep.equal(result[2])
+    })
   })
     /**
    * Exemplo do uso de stubs com tipos
