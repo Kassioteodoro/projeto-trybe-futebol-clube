@@ -3,7 +3,6 @@ import Team from '../database/models/Team';
 export default class TeamService {
   static getAll = async () => {
     const response = await Team.findAll();
-    // console.log(tratamanto);
     return response;
   };
 

@@ -4,6 +4,7 @@ import Team from '../services/team.service';
 export default class SearchTeams {
   getAll = async (_req: Request, res: Response) => {
     const response = await Team.getAll();
+
     res.status(200).json(response);
   };
 

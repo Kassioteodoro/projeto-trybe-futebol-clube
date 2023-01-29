@@ -5,13 +5,14 @@ const { stub } = sinon;
 // @ts-ignore
 import chaiHttp = require('chai-http');
 
-import { mockToken, responseJwtValidate, responseUserGet } from './mocks';
+import { mockToken, responseJwtValidate, responseTeamAll, responseTeamId, responseUserGet } from './mocks';
 import User from '../database/models/User';
 import _jwt from '../utils/jwt';
 import { app } from '../app'
 import loginValidate from '../validates/Login.validate'
 
 import { Response } from 'superagent'
+import Team from '../database/models/Team';
 
 chai.use(chaiHttp);
 
@@ -24,10 +25,10 @@ const { expect } = chai;
 
 // omitir os `console.log`s dos testes gerando um `stub` pra função
 describe('testando Rodas:', function () {
-
-  describe('login:', function () {
   
+  describe('login:', function () {
     let chaiHttpResponse: Response;
+  
     describe('post:/login', function () {
 
       before( async () => {
@@ -59,10 +60,11 @@ describe('testando Rodas:', function () {
     describe('get:/login/validate', function () {
       
       before( async () => {
-      sinon
-        .stub(_jwt, "verifyToken")
-        .resolves(responseJwtValidate as _jwt);
-      chaiHttpResponse = await chai.request(app)
+        sinon
+          .stub(_jwt, "verifyToken")
+          .resolves(responseJwtValidate as _jwt);
+
+        chaiHttpResponse = await chai.request(app)
           .get('/login/validate')
           .auth('authorization', `${mockToken.token}`)
           .send({
@@ -76,15 +78,64 @@ describe('testando Rodas:', function () {
       })
 
       it('return status 200', function () {
-        console.log(chaiHttpResponse.status);
         
         expect(chaiHttpResponse.status).to.deep.equal(200)
       })
 
       it('return objeto correto', function () {
-        console.log(chaiHttpResponse.body);
 
         expect(chaiHttpResponse.body).to.deep.equal({role: 'admin'})
+      })
+    })
+  })
+
+  describe('team', function () {
+
+    let chaiHttpResponse2: Response
+
+    describe('get:/teams', function () {
+
+      before( async () => {
+        sinon
+        .stub(Team, "findAll")
+        .resolves(responseTeamAll as Team[]);
+
+      chaiHttpResponse2 = await chai.request(app)
+          .get('/teams')
+      })
+
+      after(()=>{
+        (Team.findAll as sinon.SinonStub).restore();
+      })
+      
+      it('return status 200', function () {
+        
+        expect(chaiHttpResponse2.status).to.deep.equal(200)
+      })
+      it('return objeto corretamente', function () {
+        
+        expect(chaiHttpResponse2.body).to.deep.equal(responseTeamAll)
+      })
+    })
+    describe('get/teams/id', function () {
+      before( async () => {
+        sinon
+        .stub(Team, "findByPk")
+        .resolves(responseTeamId as Team);
+
+      chaiHttpResponse2 = await chai.request(app)
+          .get('/teams/3')
+      })
+
+      after(()=>{
+        (Team.findByPk as sinon.SinonStub).restore();
+      })
+
+      it('return status 200', function () {
+        expect(chaiHttpResponse2.status).to.deep.equal(200)
+      })
+      it('return objeto corretamente', function () {
+        expect(chaiHttpResponse2.body).to.deep.equal(responseTeamId)
       })
     })
   })
