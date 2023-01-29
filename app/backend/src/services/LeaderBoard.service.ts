@@ -103,7 +103,7 @@ export default class leardBoardService {
       totalDraws: totals.totalDraws });
     const { dataValues: { homeTeam: { dataValues: { teamName } } } } = response[0];
     // console.log('Service', totals, cal, teamName);
-    return { totals, cal, teamName };
+    return { name: teamName, totalPoints: cal.totalPoints, ...totals, efficiency: cal.efficiency };
   };
 
   static getListHome = async () => {
@@ -112,7 +112,12 @@ export default class leardBoardService {
       const res = await this.getFilterEndTeam(name as number);
       return res;
     });
-    const response = await Promise.all(promises);
+    const response: any = await Promise.all(promises);
+    // const result = response.sort((a, b) => {
+    //   if (a.totalPoints < b.totalPoints) return -1;
+    //   return true;
+    // });
     console.log(response);
+    return response;
   };
 }
