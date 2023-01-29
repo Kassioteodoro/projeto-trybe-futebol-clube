@@ -4,6 +4,7 @@ import Matche from '../services/matches.service';
 export default class Matches {
   getAll = async (_req: Request, res: Response) => {
     const response = await Matche.getAll();
+
     res.status(200).json(response);
   };
 

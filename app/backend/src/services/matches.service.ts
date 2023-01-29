@@ -6,7 +6,6 @@ import Matche from '../database/models/Matche';
 export default class matchesService {
   static getAll = async () => {
     const response = await Matche.findAll({
-      raw: true,
       include: [
         {
           model: Team,
