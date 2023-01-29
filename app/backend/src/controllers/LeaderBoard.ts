@@ -3,14 +3,21 @@ import LeaderBoardService from '../services/LeaderBoard.service';
 
 export default class LeaderBoard {
   getAllFilterEnd = async (req: Request, res: Response) => {
-    // retornar todos os marches finalizados
-    // const response = await LeaderBoardService.getFilterEndTeam(1);
     const response = await LeaderBoardService.getListHome();
-    const result = response.sort((a: { totalPoints: number }, b: { totalPoints: number }) => {
+    const result = response.sort((
+      a: { totalPoints: number, totalVictories: number, goalsFavor: number, goalsBalance: number },
+      b: { totalPoints: number, totalVictories: number, goalsFavor: number, goalsBalance: number },
+    ) => {
       if (a.totalPoints > b.totalPoints) return -1;
-      return true;
+      if (a.totalPoints < b.totalPoints) return 1;
+      if (a.totalVictories > b.totalVictories) return -1;
+      if (a.totalVictories < b.totalVictories) return 1;
+      if (a.goalsBalance > b.goalsBalance) return -1;
+      if (a.goalsBalance < b.goalsBalance) return 1;
+      if (a.goalsFavor > b.goalsFavor) return -1;
+      if (a.goalsFavor < b.goalsFavor) return 1;
+      return 0;
     });
-    // console.log('controllers', result);
     res.status(200).json(result);
   };
 }
