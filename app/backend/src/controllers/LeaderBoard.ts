@@ -10,7 +10,7 @@ export default class LeaderBoard {
       if (a.totalPoints > b.totalPoints) return -1;
       return true;
     });
-    console.log('controllers', result);
+    // console.log('controllers', result);
     res.status(200).json(result);
   };
 }

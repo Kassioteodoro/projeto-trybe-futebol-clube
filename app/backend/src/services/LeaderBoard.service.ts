@@ -117,7 +117,7 @@ export default class leardBoardService {
     //   if (a.totalPoints < b.totalPoints) return -1;
     //   return true;
     // });
-    console.log(response);
+    // console.log(response);
     return response;
   };
 }

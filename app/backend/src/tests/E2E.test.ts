@@ -13,7 +13,8 @@ import { mockToken,
        responseTeamAll,
         responseTeamId,
          responseUserGet,
-        responseCreateMatch } from './mocks';
+        responseCreateMatch, 
+        responseLaederBoardController} from './mocks';
 import User from '../database/models/User';
 import _jwt from '../utils/jwt';
 import { app } from '../app'
@@ -22,6 +23,8 @@ import loginValidate from '../validates/Login.validate'
 import { Response } from 'superagent'
 import Team from '../database/models/Team';
 import Matche from '../database/models/Matche';
+import LeardBoardService from '../services/LeaderBoard.service';
+import leardBoardService from '../services/LeaderBoard.service';
 
 chai.use(chaiHttp);
 
@@ -294,6 +297,29 @@ describe('testando Rodas:', function () {
         })
       })
     })
+  })
+  describe('leaderBoard', function () {
+    let chaiHttpResponse4: Response
+    describe('get:/LeaderBoard/home', function () {
+      before( async () => {
+        sinon
+        .stub(LeardBoardService, "getListHome")
+        .resolves(responseLaederBoardController as LeardBoardService);
 
+      chaiHttpResponse4 = await chai.request(app)
+          .get('/LeaderBoard/home')
+      })
+
+      after(()=>{
+        (leardBoardService.getListHome as sinon.SinonStub).restore();
+      })
+
+      it('return status 200', function () {
+        expect(chaiHttpResponse4.status).to.deep.equal(200)
+      })
+      it('return objeto correto', function () {
+        expect(chaiHttpResponse4.body).to.deep.equal(responseLaederBoardController)
+      })
+    })
   })
 });
