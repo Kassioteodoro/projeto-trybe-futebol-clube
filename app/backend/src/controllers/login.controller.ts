@@ -2,9 +2,9 @@ import { Request, Response } from 'express';
 import login from '../services/login.service';
 
 export default class Login {
-  LoginAcess = (req: Request, res: Response) => {
+  LoginAcess = async (req: Request, res: Response) => {
     const { body: { user } } = req;
-    const response = login.returnToken({ id: user.id, role: user.role, email: user.email });
+    const response = await login.returnToken({ id: user.id, role: user.role, email: user.email });
     res.status(200).json({ token: response });
   };
 }

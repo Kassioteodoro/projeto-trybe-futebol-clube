@@ -29,6 +29,6 @@ export default class LoginValidate {
     if (!emailRegex.test(this._response.email)) return false;
     if (!user) return false;
     if (!crypto.validPassword(this._response.password, user.password)) return false;
-    return user.dataValues;
+    return user;
   };
 }

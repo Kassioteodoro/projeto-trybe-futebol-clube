@@ -8,7 +8,7 @@ export default class validateToken {
     if (!authorization) {
       return res.status(statusCode.invalidToken).json({ message: 'Token not Found' });
     }
-    const response = _jwt.verifyToken(authorization);
+    const response = await _jwt.verifyToken(authorization);
 
     if (response === 'Error') {
       return res.status(statusCode.invalidToken).json({ message: 'Token must be a valid token' });

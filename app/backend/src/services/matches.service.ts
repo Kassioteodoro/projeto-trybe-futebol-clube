@@ -6,6 +6,7 @@ import Matche from '../database/models/Matche';
 export default class matchesService {
   static getAll = async () => {
     const response = await Matche.findAll({
+      raw: true,
       include: [
         {
           model: Team,
@@ -71,20 +72,17 @@ export default class matchesService {
   };
 
   static endMatche = async (id: number) => {
-    const response = await Matche.update(
+    await Matche.update(
       { inProgress: false },
       { where: { id } },
     );
-    console.log(response);
   };
 
   static updateMatch = async (id: number, goals: IUpdateMatch) => {
-    const response = await Matche.update(
+    await Matche.update(
       { homeTeamGoals: goals.homeTeamGoals,
         awayTeamGoals: goals.awayTeamGoals },
       { where: { id } },
     );
-    console.log(response);
-    return response;
   };
 }

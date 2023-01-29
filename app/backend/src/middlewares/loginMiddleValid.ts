@@ -22,7 +22,8 @@ export default class LoginMiddleValid {
   };
 
   static loginValidate = (req: Request, res: Response) => {
-    const { body: { token } } = req;
-    res.status(200).json({ role: token.role });
+    const { body } = req;
+
+    res.status(200).json({ role: body.token.role });
   };
 }
