@@ -1,50 +1,7 @@
-// import IUpdateMatch from '../interfaces/IUpdateMatch';
-// import IMatches from '../interfaces/IMatches';
 import Team from '../database/models/Team';
 import Matche from '../database/models/Matche';
 
-// endPoint LeaderBorad/home
-// 1 filtrar a classificacao dos times da casa
-//  ou seja, fazer um top 1 com os times que jogaram em casa
-// apenas partidas que ja foram finalizadas
-// retorno e um array exatamente assim:
-// [
-//   {
-//     "name": "Santos",
-//     "totalPoints": 9,
-//     "totalGames": 3,
-//     "totalVictories": 3,
-//     "totalDraws": 0,
-//     "totalLosses": 0,
-//     "goalsFavor": 9,
-//     "goalsOwn": 3,
-//     "goalsBalance": 6,
-//     "efficiency": "100.00"
-//   },
-//   {
-//     "name": "Palmeiras",
-//     "totalPoints": 7,
-//     "totalGames": 3,
-//     "totalVictories": 2,
-//     "totalDraws": 1,
-//     "totalLosses": 0,
-//     "goalsFavor": 10,
-//     "goalsOwn": 5,
-//     "goalsBalance": 5,
-//     "efficiency": "77.78"
-//   },
-// ]
 export default class leardBoardService {
-  // protected name: string;
-  // protected totalPoints: number;
-  // protected totalGames: number;
-  // protected totalVictories: number;
-  // protected totalDraws: number;
-  // protected totalLosses: number;
-  // protected goalsFavor: number;
-  // protected goalsOwn: number;
-  // protected goalsBalance: number;
-  // protected efficiency: number;
   static getTotal(response: { homeTeamGoals: number, awayTeamGoals: number }[]) {
     const totalGames = response.length;
     const totalVictories = response
@@ -71,7 +28,7 @@ export default class leardBoardService {
     totalVictories: number,
     totalDraws: number,
   }) {
-    // (totalDeVitorias / (totalDeGames * 3)) * 100
+    // (totalDePoints / (totalDeGames * 3)) * 100
     const totalPoints = (total.totalVictories * 3) + total.totalDraws;
     // achei em uma resposta no slack
     const efficiency = ((totalPoints / (total.totalGames * 3)) * 100).toFixed(2);
@@ -83,6 +40,7 @@ export default class leardBoardService {
       where: { inProgress: false },
       include: [{ model: Team, as: 'homeTeam' }, { model: Team, as: 'awayTeam' }],
     });
+
     const names = response.map((t) => t.homeTeamId);
     const newList = new Set();
     names.forEach((name) => newList.add(name));
@@ -102,7 +60,6 @@ export default class leardBoardService {
       totalVictories: totals.totalVictories,
       totalDraws: totals.totalDraws });
     const { dataValues: { homeTeam: { dataValues: { teamName } } } } = response[0];
-    // console.log('Service', totals, cal, teamName);
     return { name: teamName, totalPoints: cal.totalPoints, ...totals, efficiency: cal.efficiency };
   };
 
@@ -113,11 +70,6 @@ export default class leardBoardService {
       return res;
     });
     const response: any = await Promise.all(promises);
-    // const result = response.sort((a, b) => {
-    //   if (a.totalPoints < b.totalPoints) return -1;
-    //   return true;
-    // });
-    // console.log(response);
     return response;
   };
 }
