@@ -1,13 +1,49 @@
-# :construction: README customizado em construção ! :construction:
-<!-- Olá, Tryber!
-Esse é apenas um arquivo inicial para o README do seu projeto no qual você pode customizar e reutilizar todas as vezes que for executar o trybe-publisher.
+# Projeto Trybe-Futebol-Clube
 
-Para deixá-lo com a sua cara, basta alterar o seguinte arquivo da sua máquina: ~/.student-repo-publisher/custom/_NEW_README.md
+# Contexto
+Este projeto trata-se de uma ferramenta para acessar informações de um campeonato de futebol,
+podendo obter os resultados das partidas, encontrar partidas que ainda iram acontecer, e saber detalhes dos times como quantidade de gols ou ate mesmo sua eficiencia.
 
-É essencial que você preencha esse documento por conta própria, ok?
-Não deixe de usar nossas dicas de escrita de README de projetos, e deixe sua criatividade brilhar!
-:warning: IMPORTANTE: você precisa deixar nítido:
-- quais arquivos/pastas foram desenvolvidos por você; 
-- quais arquivos/pastas foram desenvolvidos por outra pessoa estudante;
-- quais arquivos/pastas foram desenvolvidos pela Trybe.
--->
+Esse projeto e desenvolvido pela trybe, o objetivo é poder testar a capacidade de seus alunos de construir um backend orientado a objetos utilizando ferramentas como sequelize, express e Docker.
+
+### os arquivos aos quais eu sou responsavel:
+* os presentes na pasta `backend/src`
+* os arquivos `Dockerfile` de backend & frontend
+
+### :construction: Este projeto ainda sera refatorado :construction:
+
+## Técnologias usadas
+
+### Back-end:
+   > Desenvolvido usando: NodeJS, TypeScript, Sequelize, JsonWebToken, ExpressJS, MYSQL, ES6;
+
+### Testes:
+   > Desenvolvido usando: mocha, sinon, chai;
+
+## Instalando Dependências
+
+```bash
+npm install
+```
+
+## Executando aplicação
+
+### subindo Dockers:
+
+  ```
+  npm run compose:up
+  ```
+### Para rodar o front-end:
+
+  ```
+    cd app/frontend && npm start
+  ```
+
+## Executando Testes:
+
+* Para rodar todos os testes:
+
+  ```
+    npm test
+  ```
+#### Os testes sao voltados apenas para o backend !!
